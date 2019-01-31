@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
     <title>Hello, world!</title>
   </head>
   <body>
@@ -22,7 +24,7 @@
     <div class="col-md-12">
       
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table id="consulta"  class="table table-hover">
         <thead>
           <tr>
             <th>id</th>
@@ -30,9 +32,7 @@
             <th>Usuario</th>
           </tr>
         </thead>
-        <tbody class="tbody">
 
-        </tbody>
       </table>
     </div>
     
@@ -58,31 +58,20 @@
   
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 <script>
 
-url   = "source.php";  
-tbody = "";
-
-$.getJSON(url,{},function (array){
-
-
-array.forEach(function (data){
-
-tbody += "<tr>";
-tbody += "<td>"+data.id+"</td>";
-tbody += "<td>"+data.Nombre+"</td>";
-tbody += "<td>"+data.Usuario+"</td>";
-tbody += "</tr>";
-
-$('.tbody').html(tbody);
-
-});
-
-
-
-});
-
-
+$(document).ready(function() {
+    $('#consulta').DataTable( {
+        "ajax": "source2.php",
+        "columns": [
+            { "data": "id" },
+            { "data": "Nombre" },
+            { "data": "Usuario" }
+        ]
+    } );
+} );
 
 
 </script>
